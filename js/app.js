@@ -91,6 +91,13 @@ function postData(e) {
   e.preventDefault();
   const name = document.getElementById('name').value;
   const comment = document.getElementById('comment').value;
+  const config =  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, comment })
+  };
   
   /* 
     - method indicates the type of request. 
@@ -100,13 +107,7 @@ function postData(e) {
     - The method JSON.stringify() here is being used to convert the values of name and comment into a JSON string.
         -- These above comments are quotes by Guil Hernandez, from his lesson on "Posting Data with fetch()" in his "Working with the Fetch API" module of the "Intro to Programming" course at Team Tree House. They came from notes that I jotted down while following along with his interactive and video-based tutorial, which I used to produce this project.
   */
-  fetch('https://jsonplaceholder.typicode.com/comments', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name, comment })
-  })
+  fetch('https://jsonplaceholder.typicode.com/comments', config)
     .then(checkStatus)
     .then(res => res.json())
     .then(data => console.log(data))
